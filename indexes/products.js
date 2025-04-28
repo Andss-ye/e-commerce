@@ -1,4 +1,5 @@
-import { connectDB } from "../helpers/db";
+import { connectDB } from "../helpers/db.js";
+import { insert } from "../data/products.js";
 
 export async function indexProducts() {
     const client = await connectDB();
@@ -13,6 +14,7 @@ export async function indexProducts() {
     try {
         await collection.createIndex(indexFields, indexOptions);
         console.log("Index created");
+        await insert();
     } catch (error) {
         console.error("Error:", error);
     } finally {

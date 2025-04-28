@@ -1,68 +1,43 @@
 import { connectDB } from "../helpers/db.js";
+import { indexProducts } from "../indexes/products.js";
 
 export async function createProductsCollection() {
   const client = await connectDB();
   const db = client.db(process.env.DB_NAME);
 
   const validator = {
-    $jsonSchema: {
-      bsonType: 'object',
-      required: [
-        "code",
-        "name",
-        "description",
-        "images",
-        "price",
-        "stock",
-        "categories",
-        "condition"
-      ],
-      properties: {
+    bsonType: 'object', 
+    required: ['name', 'price', 'maker'],
+    properties: { 
+        _id: { bsonType: 'objectId'}, 
         code: {
-          bsonType: 'string'
+            bsonType: 'string', 
+            description: 'Ingrese el codigo del producto'
         },
         name: {
-          bsonType: 'string'
-        },
-        description: {
-          bsonType: 'string'
-        },
-        images: {
-          bsonType: 'array',
-          items: {
-            bsonType: 'string',
-            pattern: "^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9]{1,6}\\b(?:[-a-zA-Z0-9@:%_+.~#?&/=]*)$"
-          }
-        },
+            bsonType: 'string', 
+            description: 'Ingrese el nombre del producto'
+        }, 
         price: {
-          bsonType: 'double',
+            bsonType: 'double', 
+            description: 'Ingrese el precio del producto'
         },
-        stock: {
-          bsonType: 'int'
-        },
-        categories: {
-          bsonType: 'objectId'
-        },
-        brand: {
-          bsonType: 'string'
-        },
-        condition: {
-          bsonType: 'string',
-          enum: ['new', 'used', 'remanufactured']
-        },
-        vat: {
-          bsonType: 'int'
-        },
-        active: {
-          bsonType: 'bool'
+        maker: {
+            bsonType: 'string', 
+            description: 'Numero del fabricante'
+        }, 
+           description: {
+            bsonType: 'string', 
+            description: 'Ingrese ficha tecnica del producto'
         }
-      }
-    }
-  }
+    }, 
+    additionalProperties: false
+}
 
   try {
     await db.createCollection("products", { validator });
     console.log("Collection 'products' created");
+    await indexProducts();
   } catch (error) {
     console.error(error)
   }

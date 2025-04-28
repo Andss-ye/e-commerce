@@ -1,19 +1,20 @@
-import { connectDB } from "../helpers/db";
+import { connectDB } from "../helpers/db.js";
+import { insert } from "../data/makers.js";
 
-export async function indexCategories() {
+export async function indexMakers() {
     const client = await connectDB();
     const db = client.db(process.env.DB_NAME);
-    const collection = db.collection("categories");
+    const collection = db.collection("makers");
     const indexFields = {
         code: 1
     };
     const indexOptions = {
-        unique: true,
         name: "idx_code",
     };
     try {
         await collection.createIndex(indexFields, indexOptions);
         console.log("Index created");
+        await insert();
     } catch (error) {
         console.error("Error:", error);
     } finally {

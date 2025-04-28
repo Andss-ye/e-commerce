@@ -1,62 +1,46 @@
 import { connectDB } from '../helpers/db.js';
+import { indexUsers } from '../indexes/users.js';
 
 export async function createUsersCollection() {
   const client = await connectDB();
   const db = client.db(process.env.DB_NAME);
 
   const validator = {
-    $jsonSchema: {
-      bsonType: "object",
-      required: [
-        "name",
-        "email",
-        "password",
-        "document_type",
-        "document_number",
-        "phone",
-        "place",
-      ],
-      properties: {
-        name: {
-          bsonType: "string",
+    bsonType: 'object', 
+    required: ['firstName', 'lastName', 'gender'],
+    properties: { 
+        _id: { bsonType: 'objectId'}, 
+        firstName: {
+            bsonType: 'string', 
+            description: 'Ingrese el nombre del completo'
         },
-        email: {
-          bsonType: "string",
-          pattern: "^\\+?[1-9][0-9]{7,14}$"
-        },
-        password: {
-          bsonType: "string",
-          pattern: "^[A-Za-z0-9]{8,12}$",
-          minLength: 8,
-          maxLength: 12,
-        },
-        document_type: {
-          bsonType: "string",
-          enum: ["CC", "CE", "PS", "PEP"],
-        },
-        phone: {
-          bsonType: "string",
-          pattern: "^\\+?[1-9][0-9]{7,14}$"
-        },
-        place: {
-          bsonType: 'object'
+        lastName: {
+            bsonType: 'string', 
+            description: 'Ingrese el apellido completo'
         },
         gender: {
-          bsonType: 'string',
-          enum: ['M', 'F'],
+            bsonType: 'string',
+            enum: ['M', 'F'],
+            description: 'Ingrese el genero del usuario y sea M o F'
+        }, 
+        hobbies: {
+            bsonType: 'array',
+            description: 'Seleccione sus pasatiempos',
+            items: {
+                bsonType: 'string',
+                enum: ['Hornear', 'Jardineria', 'Instrumentos Musicales', 'Puzzles de logica', 'Poker y Blackjack', 'Orientacion', 'Carpinteria'],
+                description: 'Seleccione alguna de las opcoiones validas'
+            }
         },
-        user_type: {
-          bsonType: 'array',
-          items: {
-            bsonType: 'string'
-          }
+        age: {
+            bsonType: 'int',
+            minimum: 18,
+            description: 'La edad debe ser mayor de edad y un numero'
         },
-        active: {
-          bsonType: 'bool'
-        }
-      },
-    },
-  }
+    }, 
+    additionalProperties: false
+}
+
 
   try {
     await db.createCollection("users", { validator });
