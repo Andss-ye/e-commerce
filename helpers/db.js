@@ -3,10 +3,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.URI;
 
 if (!uri) {
-  throw new Error('La variable de entorno MONGODB_URI no está definida');
+  throw new Error("there's no uri");
 }
 
 const client = new MongoClient(uri);
@@ -14,10 +14,10 @@ const client = new MongoClient(uri);
 export async function connectDB() {
   try {
     await client.connect();
-    console.log('Conexión exitosa a MongoDB');
+    console.log('');
     return client;
   } catch (error) {
-    console.error('Error al conectar con MongoDB:', error);
+    console.error('Error in connection:', error);
     throw error;
   }
 }
@@ -25,9 +25,9 @@ export async function connectDB() {
 export async function closeDB() {
   try {
     await client.close();
-    console.log('Conexión a MongoDB cerrada');
+    console.log('Conexión closed');
   } catch (error) {
-    console.error('Error al cerrar la conexión con MongoDB:', error);
+    console.error('Error in closing:', error);
     throw error;
   }
 }

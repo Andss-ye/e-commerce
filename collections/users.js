@@ -1,31 +1,32 @@
-import { connectDB } from "../helpers/db";
+import { getClient } from '../helpers/db.js';
 
 export async function createUsersCollection() {
-    const db = await connectDB();
+  const client = await getClient();
+  const db = client.db(process.env.DB_NAME);
 
-    const validator = {
-        $jsonSchema: {
-            bsonType: "object",
-            required: ["name", "email"],
-            properties: {
-                name: {
-                    bsonType: "string",
-                },
-                email: {
-                    bsonType: "string",
-                    pattern: "^.+@.+$",
-                },
-                age: {
-                    bsonType: "int",
-                }
-            }
+  const validator = {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["name", "email"],
+      properties: {
+        name: {
+          bsonType: "string",
+        },
+        email: {
+          bsonType: "string",
+          pattern: "^.+@.+$",
+        },
+        age: {
+          bsonType: "int",
         }
-    };
-
-    try {
-        await db.createCollection("users", { validator });
-        console.log("collection 'users' created");
-    } catch (error) {
-        throw error
+      }
     }
+  };
+
+  try {
+    await db.createCollection("users", { validator });
+    console.log("Collection 'users' created");
+  } catch (error) {
+    console.error(error)
+  }
 }
