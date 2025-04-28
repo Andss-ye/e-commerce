@@ -5,10 +5,6 @@ dotenv.config();
 
 const uri = process.env.URI;
 
-if (!uri) {
-  throw new Error("there's no uri");
-}
-
 const client = new MongoClient(uri);
 
 export async function connectDB() {
@@ -30,8 +26,4 @@ export async function closeDB() {
     console.error('Error in closing:', error);
     throw error;
   }
-}
-
-export function getClient() {
-  return client;
 }
