@@ -1,8 +1,9 @@
 import { connectDB } from '../helpers/db.js';
 
-export const insert = async()=>{
+export const insert = async () => {
     const client = await connectDB();
-    const products = client.collection('products');
+    const db = client.db(process.env.DB_NAME);
+    const products = db.collection('products');
     const data = [
         { code: "1", name: 'Disco duro SATA3 1TB', price: 86.99, maker: "5" },
         { code: "2", name: 'Memoria RAM DDR4 8GB', price: 120.99, maker: "6" },
@@ -15,15 +16,14 @@ export const insert = async()=>{
         { code: "9", name: 'Portátil Ideapd 320', price: 444.99, maker: "2" },
         { code: "10", name: 'Impresora HP Deskjet 3720', price: 59.99, maker: "3" },
         { code: "11", name: 'Impresora HP Laserjet Pro M26nw', price: 180.99, maker: "3" }
-      ]; 
+    ];
     try {
         let res = await products.insertMany(data);
         console.log("Datos del producto insertados");
         console.log(res);
-        
-    } catch ({writeErrors, ...error}) {
-        const { 
-            errInfo: {details:{schemaRulesNotSatisfied}}
+    } catch ({ writeErrors, ...error }) {
+        const {
+            errInfo: { details: { schemaRulesNotSatisfied } }
         } = writeErrors[0].err;
         console.log(schemaRulesNotSatisfied[0]);
     } finally {

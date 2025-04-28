@@ -2,7 +2,8 @@ import { connectDB } from '../helpers/db.js';
 
 export const insert = async()=>{
   const client = await connectDB();
-  const makers = client.collection('makers');
+  const db = client.db(process.env.DB_NAME);
+  const makers = db.collection('makers');
   const data = [
       { code: "1", name: 'Asus' },
       { code: "2", name: 'Lenovo' },

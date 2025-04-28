@@ -26,9 +26,9 @@ export async function createProductsCollection() {
             bsonType: 'string', 
             description: 'Numero del fabricante'
         }, 
-           description: {
-            bsonType: 'string', 
-            description: 'Ingrese ficha tecnica del producto'
+        description: {
+        bsonType: 'string', 
+        description: 'Ingrese ficha tecnica del producto'
         }
     }, 
     additionalProperties: false

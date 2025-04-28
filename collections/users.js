@@ -45,6 +45,7 @@ export async function createUsersCollection() {
   try {
     await db.createCollection("users", { validator });
     console.log("Collection 'users' created");
+    await indexUsers();
   } catch (error) {
     console.error(error)
   }

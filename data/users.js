@@ -2,7 +2,8 @@ import { connectDB } from '../helpers/db.js';
 
 export const insert = async()=>{
     const client = await connectDB();
-    const users = client.collection('users');
+    const db = client.db(process.env.DB_NAME);
+    const users = db.collection('users');
     const data = [
         {
             firstName: "Miguel Angel",
