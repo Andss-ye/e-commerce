@@ -6,32 +6,34 @@ export async function createProductsCollection() {
   const db = client.db(process.env.DB_NAME);
 
   const validator = {
-    bsonType: 'object', 
-    required: ['name', 'price', 'maker'],
-    properties: { 
-        _id: { bsonType: 'objectId'}, 
-        code: {
-            bsonType: 'string', 
-            description: 'Ingrese el codigo del producto'
+    $jsonSchema: {
+        bsonType: "object",
+        required: ["name", "price", "maker"],
+        properties: {
+            _id: { bsonType: "objectId" },
+            code:{
+                bsonType: "string",
+                description: "Ingrese el codigo del producto"
+            },
+            name: {
+                bsonType: "string",
+                description: "Ingrese el nombre del producto"
+            },
+            price: {
+                bsonType: "double",
+                description: "Ingrese el precio del producto"
+            },
+            maker:{
+                bsonType: "string",
+                description: "Numero del fabricante"
+            },
+            description:{
+                bsonType: "string",
+                description: "Ingrese la ficha tecnica del producto"
+            }
         },
-        name: {
-            bsonType: 'string', 
-            description: 'Ingrese el nombre del producto'
-        }, 
-        price: {
-            bsonType: 'double', 
-            description: 'Ingrese el precio del producto'
-        },
-        maker: {
-            bsonType: 'string', 
-            description: 'Numero del fabricante'
-        }, 
-        description: {
-        bsonType: 'string', 
-        description: 'Ingrese ficha tecnica del producto'
-        }
-    }, 
-    additionalProperties: false
+        additionalProperties: false
+    }
 }
 
   try {

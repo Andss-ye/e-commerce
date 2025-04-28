@@ -22,10 +22,7 @@ export const insert = async () => {
         console.log("Datos del producto insertados");
         console.log(res);
     } catch ({ writeErrors, ...error }) {
-        const {
-            errInfo: { details: { schemaRulesNotSatisfied } }
-        } = writeErrors[0].err;
-        console.log(schemaRulesNotSatisfied[0]);
+        console.error("Error:", error);
     } finally {
         await client.close();
         console.log("products data connection closed");

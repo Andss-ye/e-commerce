@@ -1,6 +1,6 @@
 import { connectDB } from '../helpers/db.js';
 
-export const insert = async()=>{
+export const insert = async () => {
     const client = await connectDB();
     const db = client.db(process.env.DB_NAME);
     const users = db.collection('users');
@@ -40,14 +40,15 @@ export const insert = async()=>{
         }
     ];
     try {
-        let res = await users.insertMany(data);
-        console.log("Datos del usuario insertados");
-        console.log(res);
-    } catch ({writeErrors, ...error}) {
-        const { 
-            errInfo: {details:{schemaRulesNotSatisfied}}
-        } = writeErrors[0].err;
-        console.log(schemaRulesNotSatisfied);
+        const res = await users.insertMany(data);
+        if (res.acknowledged) {
+            console.log("Datos del usuario insertados");
+            console.log(res);
+        } else {
+            console.error("Error: La operación insertMany no fue exitosa.");
+        }
+    } catch (error) {
+        console.error("Error al insertar datos:", error);
     } finally {
         await client.close();
         console.log("user data connection closed");

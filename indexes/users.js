@@ -6,10 +6,10 @@ export async function indexUsers() {
     const db = client.db(process.env.DB_NAME);
     const collection = db.collection("users");
     const indexFields = {
-        name: 1
+        firstName: 1
     };
     const indexOptions = {
-        name: "idx_name",
+        name: "idx_FirstName",
     };
     try {
         await collection.createIndex(indexFields, indexOptions);
