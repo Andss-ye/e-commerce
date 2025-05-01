@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "initdb": "node collections/initDB.js",
-    "dev": "ts-node --esm index.ts",
+    "dev": "node --loader ts-node/esm index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:users": "ts-node --esm tests/testUserCollection.ts"
+    "test:users": "node --loader ts-node/esm tests/testUserCollection.ts"
   },
   "keywords": [],
   "author": "",
