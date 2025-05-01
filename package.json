@@ -6,14 +6,26 @@
   "scripts": {
     "initdb": "node collections/initDB.js",
     "dev": "node --watch index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "test:users": "npm run build && node dist/tests/testUserCollection.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "dependencies": {
-    "dotenv": "^16.5.0",
+    "dotenv": "^16.4.5",
     "mongodb": "^6.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "cross-env": "^7.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
   }
 }
