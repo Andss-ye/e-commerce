@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "initdb": "node collections/initDB.js",
-    "dev": "node --loader ts-node/esm index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:users": "node --loader ts-node/esm tests/testUserCollection.ts"
+  "dev": "tsx index.ts"
   },
   "keywords": [],
   "author": "",
@@ -22,9 +19,10 @@
     "mongodb": "^6.16.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.17.32",
     "cross-env": "^7.0.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.2"
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   }
 }

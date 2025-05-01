@@ -1,4 +1,4 @@
-import { MongoCollection } from "../interfaces/mongoCollection.js";
+import { MongoCollection } from "./mongoCollection.js";
 import { Db } from "mongodb";
 import userCollectionValidator from "../validators/userCollectionValidator.json" with { type: "json" };
 import usersDataDefault from "../data/usersDataDefault.json" with { type: "json" };
