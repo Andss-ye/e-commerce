@@ -1,0 +1,35 @@
+[
+    {
+        "firstName": "Miguel Angel",
+        "lastName": "Castro Escamilla",
+        "age": 24,
+        "gender": "M"
+    },
+    {
+        "firstName": "Ana Maria",
+        "lastName": "García López",
+        "age": 30,
+        "gender": "F",
+        "hobbies": ["Poker y Blackjack", "Carpintería", "Orientación"]
+    },
+    {
+        "firstName": "Carlos Alberto",
+        "lastName": "Ramírez Rodríguez",
+        "age": 28,
+        "gender": "M",
+        "hobbies": ["Jardinería"]
+    },
+    {
+        "firstName": "Laura Fernanda",
+        "lastName": "Hernández Sánchez",
+        "age": 22,
+        "gender": "F"
+    },
+    {
+        "firstName": "Javier Alejandro",
+        "lastName": "Martínez Pérez",
+        "age": 26,
+        "gender": "M",
+        "hobbies": ["Puzzles de lógica", "Carpintería"]
+    }
+]

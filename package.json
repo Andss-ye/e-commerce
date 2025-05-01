@@ -5,10 +5,9 @@
   "main": "index.js",
   "scripts": {
     "initdb": "node collections/initDB.js",
-    "dev": "node --watch index.js",
+    "dev": "ts-node --esm index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "test:users": "npm run build && node dist/tests/testUserCollection.js"
+    "test:users": "ts-node --esm tests/testUserCollection.ts"
   },
   "keywords": [],
   "author": "",
