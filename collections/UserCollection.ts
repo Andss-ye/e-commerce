@@ -27,7 +27,7 @@ export class UserCollection implements MongoCollection {
   }
 
   async createIndexes() {
-    const collection = this.db.collection("users");
+    const collection = this.db.collection(this.collectionName);
     const indexFields = {
       firstName: 1,
     };
@@ -43,7 +43,7 @@ export class UserCollection implements MongoCollection {
   }
 
   async insertData() {
-    const users = this.db.collection("users");
+    const users = this.db.collection(this.collectionName);
     try {
       const res = await users.insertMany(usersDataDefault);
       if (res.acknowledged) {
