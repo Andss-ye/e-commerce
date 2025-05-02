@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import setup from "./setup.js";
+import setup from "./setup/setup.js";
 import dotenv from "dotenv";
 
 dotenv.config();

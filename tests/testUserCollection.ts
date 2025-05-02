@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { UserCollection } from "../collections/UserCollection.js";
+import { UserCollection } from "../setup/collections/UserCollection.js";
 import dotenv from "dotenv";
 dotenv.config();
 

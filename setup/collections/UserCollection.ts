@@ -1,7 +1,7 @@
 import { MongoCollection } from "./mongoCollection.js";
 import { Db } from "mongodb";
-import userCollectionValidator from "../validators/userCollectionValidator.json" with { type: "json" };
-import usersDataDefault from "../data/usersDataDefault.json" with { type: "json" };
+import userCollectionValidator from "../data/validators/userCollectionValidator.json" with { type: "json" };
+import usersDataDefault from "../data/default/usersDataDefault.json" with { type: "json" };
 
 export class UserCollection implements MongoCollection {
   private db: Db;
