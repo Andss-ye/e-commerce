@@ -1,0 +1,17 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": ["code", "name"],
+    "properties": {
+      "code": {
+        "bsonType": "string"
+      },
+      "name": {
+        "bsonType": "string"
+      },
+      "active": {
+        "bsonType": "bool"
+      }
+    }
+  }
+}
