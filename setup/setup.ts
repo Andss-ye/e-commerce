@@ -2,11 +2,14 @@ import { Db, MongoClient } from "mongodb";
 import { FactoryUsers } from "./factories/FactoryUsers.js";
 import { FactoryProducts } from "./factories/FactoryProducts.js";
 import { FactoryMakers } from "./factories/FactoryMakers.js";
+import { FactoryCategories } from "./factories/FactoryCategories.js";
+import { FactoryPaymentMethod } from "./factories/FactoryPaymentMethod.js";
+import { FactorySales } from "./factories/FactorySales.js";
 
 export default async function setup(db: Db, client: MongoClient) {
   try {
     console.log("Iniciando configuración de la base de datos...");
-    const colecciones = [new FactoryUsers(db), new FactoryProducts(db), new FactoryMakers(db)];
+    const colecciones = [new FactoryUsers(db), new FactoryProducts(db), new FactoryMakers(db), new FactoryCategories(db), new FactoryPaymentMethod(db), new FactorySales(db)];
 
     for (const factory of colecciones) {
       try {

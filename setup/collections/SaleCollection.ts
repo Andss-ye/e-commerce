@@ -13,7 +13,7 @@ export class SaleCollection implements MongoCollection {
     async createCollection() {
         try {
             await this.db.createCollection(this.collectionName, {
-            validator: { saleCollectionValidator }})
+            validator: saleCollectionValidator })
             console.log("Collection 'sales' created");
         } catch (error) {
             if (error instanceof Error) {

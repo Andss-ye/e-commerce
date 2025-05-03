@@ -13,8 +13,8 @@ export class PaymentMethodCollection implements MongoCollection {
   async createCollection() {
     try {
       await this.db.createCollection(this.collectionName, {
-        validator: { paymentMethodsCollectionValidator },
-      });
+        validator: paymentMethodsCollectionValidator }
+      );
       console.log("Collection 'payment_methods' created");
     } catch (error) {
       if (error instanceof Error) {
