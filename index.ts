@@ -1,30 +1,14 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, Db } from "mongodb";
 import setup from "./setup/setup.js";
-import dotenv from "dotenv";
+import { connectDB } from "./db/db.js"; 
 
-dotenv.config();
-
-const uri = process.env.URI as string;
-const dbName = process.env.DB_NAME as string;
-
-if (!uri) {
-  console.error("URI variable isn't");
-  process.exit(1);
-}
-
-if (!dbName) {
-  console.error("DB_NAME variable isn't");
-  process.exit(1);
-}
+const connectDBTyped: () => Promise<{ client: MongoClient; db: Db }> = connectDB;
 
 async function main() {
   try {
-    const client = await MongoClient.connect(uri);
-    const db = client.db(dbName);
-    console.log(`Conexin a la base de datos "${dbName}" establecida`);
-    
+    const { client, db } = await connectDBTyped();
+    console.log(`Conexion a la db establecida`);
     await setup(db, client);
-    
   } catch (error) {
     console.error("Error during database:");
     if (error instanceof Error) {
