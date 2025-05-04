@@ -31,12 +31,5 @@ export default async function setup(db: Db, client: MongoClient) {
       console.error(error);
     }
     throw error; 
-  } finally {
-    try {
-      await client.close();
-      console.log("Conexión a MongoDB cerrada correctamente");
-    } catch (closeError) {
-      console.error("Error al cerrar la conexión a MongoDB:", closeError);
-    }
   }
 }
