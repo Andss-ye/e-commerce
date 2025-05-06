@@ -1,0 +1,1 @@
+POR FAVOR ANTES DE INICIAR LA EJECUCION CON EL COMANDO 'npm run dev' CREE UN ARCHIVO .env CON VARIABLES 'URI', 'DB_NAME, en DB_NAME se recomienda poner 'ecommerce'
