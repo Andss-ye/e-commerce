@@ -1,6 +1,7 @@
-import { Db } from "mongodb";
+import { Db, ObjectId } from "mongodb";
 import { MongoCollection } from "./mongoCollection.js";
 import categorieCollectionValidator from "../data/validators/categorieCollectionValidator.json" with { type: "json" };
+import categoriesDataDefault from "../data/default/categoriesDataDefault.json" with { type: "json" };
 
 export class CategorieCollection implements MongoCollection {
     private db: Db;
@@ -42,6 +43,21 @@ export class CategorieCollection implements MongoCollection {
     }
 
     async insertData() {
-        return; // No data to insert in this collection
+        const categories = this.db.collection(this.collectionName);
+        try {
+            const formattedCategoriesData = categoriesDataDefault.map((category) => ({
+                ...category,
+                _id: new ObjectId(category._id),
+            }));
+
+            let res = await categories.insertMany(formattedCategoriesData);
+            console.log("Datos de las categorias insertados");
+            console.log(res);
+        } catch (error: any) {
+            if (error.writeErrors) {
+                console.error("Write Errors:", error.writeErrors);
+            }
+            console.error("Error:", error);
+        }
     }
 }

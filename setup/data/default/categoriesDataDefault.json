@@ -1,0 +1,14 @@
+[
+    {
+        "_id": "681a13cf2f74641f6f29f1b8",
+        "code": "ELEC",
+        "name": "Electrónica",
+        "active": true
+    },
+    {
+        "_id": "681a13cf2f74641f6f29f1b9",
+        "code": "TEC",
+        "name": "Tecnología",
+        "active": true
+    }
+]

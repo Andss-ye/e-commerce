@@ -1,5 +1,5 @@
 import { MongoCollection } from "./mongoCollection.js";
-import { Db } from "mongodb";
+import { Db, ObjectId } from "mongodb";
 import productCollectionValidator from "../data/validators/productCollectionValidator.json" with { type: "json" };
 import productsDataDefault from "../data/default/productsDataDefault.json" with { type: "json" };
 
@@ -39,7 +39,13 @@ export class ProductCollection implements MongoCollection {
     async insertData() {
         const products = this.db.collection(this.collectionName);
         try {
-            let res = await products.insertMany(productsDataDefault as any[]);
+            const formattedProductsData = productsDataDefault.map((product) => ({
+                ...product,
+                categories: new ObjectId(product.categories),
+                _id: new ObjectId(product._id),
+            }));
+
+            let res = await products.insertMany(formattedProductsData);
             console.log("Datos del producto insertados");
             console.log(res);
         } catch (error: any) {

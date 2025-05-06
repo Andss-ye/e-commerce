@@ -1,35 +1,20 @@
 [
     {
-        "firstName": "Miguel Angel",
-        "lastName": "Castro Escamilla",
-        "age": 24,
-        "gender": "M"
-    },
-    {
-        "firstName": "Ana Maria",
-        "lastName": "García López",
-        "age": 30,
-        "gender": "F",
-        "hobbies": ["Poker y Blackjack", "Carpintería", "Orientación"]
-    },
-    {
-        "firstName": "Carlos Alberto",
-        "lastName": "Ramírez Rodríguez",
-        "age": 28,
-        "gender": "M",
-        "hobbies": ["Jardinería"]
-    },
-    {
-        "firstName": "Laura Fernanda",
-        "lastName": "Hernández Sánchez",
-        "age": 22,
-        "gender": "F"
-    },
-    {
-        "firstName": "Javier Alejandro",
-        "lastName": "Martínez Pérez",
-        "age": 26,
-        "gender": "M",
-        "hobbies": ["Puzzles de lógica", "Carpintería"]
+        "_id": "681a14caf7fde7dfbd1a81c4",
+        "name": "Andrew",
+        "email": "andrew@gmail.com",
+        "password": "Password123",
+        "document_type": "CC",
+        "document_number": "123456789",
+        "phone": "+573001234567",
+        "place": {
+          "city": "Bogotá",
+          "country": "Colombia",
+          "address": "Carrera 45 #123-45",
+          "zip_code": 111111
+        },
+        "user_type": ["admin"],
+        "register_date": "2023-01-01T00:00:00Z",
+        "active": true
     }
 ]

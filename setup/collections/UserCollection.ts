@@ -1,5 +1,5 @@
 import { MongoCollection } from "./mongoCollection.js";
-import { Db } from "mongodb";
+import { Db, ObjectId } from "mongodb";
 import userCollectionValidator from "../data/validators/userCollectionValidator.json" with { type: "json" };
 import usersDataDefault from "../data/default/usersDataDefault.json" with { type: "json" };
 
@@ -45,13 +45,15 @@ export class UserCollection implements MongoCollection {
   async insertData() {
     const users = this.db.collection(this.collectionName);
     try {
-      const res = await users.insertMany(usersDataDefault);
-      if (res.acknowledged) {
-        console.log("Datos del usuario insertados");
-        console.log(res);
-      } else {
-        console.error("Error: La operación insertMany no fue exitosa.");
-      }
+      const formattedUsersData = usersDataDefault.map((user) => ({
+        ...user,
+        _id: new ObjectId(user._id),
+        register_date: new Date(user.register_date)
+      }));
+
+      const res = await users.insertMany(formattedUsersData);
+      console.log("Datos del usuario insertados");
+      console.log(res);
     } catch (error) {
       console.error("Error al insertar datos:", error);
     }

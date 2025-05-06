@@ -1,6 +1,7 @@
 import { MongoCollection } from "./mongoCollection.js";
 import paymentMethodsCollectionValidator from "../data/validators/paymentMethodsCollectionValidator.json" with { type: "json" };
-import { Db } from "mongodb";
+import { Db, ObjectId } from "mongodb";
+import paymentMethodsDataDefault from "../data/default/payment_methodsDataDefault.json" with { type: "json" };
 
 export class PaymentMethodCollection implements MongoCollection {
   private db: Db;
@@ -43,6 +44,20 @@ export class PaymentMethodCollection implements MongoCollection {
   }
 
   async insertData() {
-    return; // No data to insert in this collection
+    const paymentMethods = this.db.collection(this.collectionName);
+    try {
+      const formattedPaymentMethodsData = paymentMethodsDataDefault.map((paymentMethod) => ({
+        ...paymentMethod,
+        _id: new ObjectId(paymentMethod._id),
+      }));
+      let res = await paymentMethods.insertMany(formattedPaymentMethodsData);
+      console.log("Datos de los métodos de pago insertados");
+      console.log(res);
+    } catch (error: any) {
+      if (error.writeErrors) {
+        console.error("Write Errors:", error.writeErrors);
+      }
+      console.error("Error:", error);
+    }
   }
 }

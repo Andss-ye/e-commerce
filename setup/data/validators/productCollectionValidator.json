@@ -1,30 +1,54 @@
 {
-    "$jsonSchema": {
-        "bsonType": "object",
-        "required": ["name", "price", "maker"],
-        "properties": {
-            "_id": { "bsonType": "objectId" },
-            "code":{
-                "bsonType": "string",
-                "description": "Ingrese el codigo del producto"
-            },
-            "name": {
-                "bsonType": "string",
-                "description": "Ingrese el nombre del producto"
-            },
-            "price": {
-                "bsonType": "double",
-                "description": "Ingrese el precio del producto"
-            },
-            "maker":{
-                "bsonType": "string",
-                "description": "Numero del fabricante"
-            },
-            "description":{
-                "bsonType": "string",
-                "description": "Ingrese la ficha tecnica del producto"
-            }
-        },
-        "additionalProperties": false
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "code",
+      "name",
+      "description",
+      "images",
+      "price",
+      "stock",
+      "categories",
+      "condition"
+    ],
+    "properties": {
+      "code": {
+        "bsonType": "string"
+      },
+      "name": {
+        "bsonType": "string"
+      },
+      "description": {
+        "bsonType": "string"
+      },
+      "images": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "string"
+        }
+      },
+      "price": {
+        "bsonType": "int"
+      },
+      "stock": {
+        "bsonType": "int"
+      },
+      "categories": {
+        "bsonType": "objectId"
+      },
+      "brand": {
+        "bsonType": "string"
+      },
+      "condition": {
+        "bsonType": "string",
+        "enum": ["new", "used", "remanufactured"]
+      },
+      "vat": {
+        "bsonType": "int"
+      },
+      "active": {
+        "bsonType": "bool"
+      }
     }
+  }
 }

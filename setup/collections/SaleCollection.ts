@@ -1,6 +1,7 @@
-import { Db } from "mongodb";
+import { Db, ObjectId } from "mongodb";
 import { MongoCollection } from "./mongoCollection.js";
 import saleCollectionValidator from "../data/validators/saleCollectionValidator.json" with { type: "json" };
+import salesDataDefault from "../data/default/salesDataDefault.json" with { type: "json" };
 
 export class SaleCollection implements MongoCollection {
     private db: Db;
@@ -41,6 +42,28 @@ export class SaleCollection implements MongoCollection {
         } 
     }
     async insertData() {
-        return; // No data to insert in this collection
+        const sales = this.db.collection(this.collectionName);
+        try {
+            const formattedSalesData = salesDataDefault.map((sale) => ({
+                ...sale,
+                date: new Date(sale.date),
+                payment_method: new ObjectId(sale.payment_method),
+                client: new ObjectId(sale.client),
+                seller: new ObjectId(sale.seller),
+                details: sale.details.map((detail: any) => ({
+                    ...detail,
+                    product: new ObjectId(detail.product)
+                }))
+            }));
+
+            let res = await sales.insertMany(formattedSalesData);
+            console.log("Sales data inserted");
+            console.log(res);
+        } catch (error: any) {
+            if (error.writeErrors) {
+                console.error("Write Errors:", error.writeErrors);
+            }
+            console.error("Error:", error);
+        }
     }
 }

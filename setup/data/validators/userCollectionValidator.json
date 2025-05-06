@@ -1,45 +1,46 @@
 {
   "$jsonSchema": {
     "bsonType": "object",
-    "required": ["firstName", "lastName", "gender"],
+    "required": [
+      "name",
+      "email",
+      "password",
+      "document_type",
+      "document_number",
+      "phone",
+      "place"
+    ],
     "properties": {
-      "_id": { "bsonType": "objectId" },
-      "firstName": {
-        "bsonType": "string",
-        "description": "Ingrese su nombre completo"
+      "name": {
+        "bsonType": "string"
       },
-      "lastName": {
-        "bsonType": "string",
-        "description": "Ingrese sus apellidos completo"
+      "email": {
+        "bsonType": "string"
       },
-      "gender": {
+      "password": {
         "bsonType": "string",
-        "enum": ["M", "F"],
-        "description": "Seleccione algunas de las opciones válidas 'M y F'"
+        "minLength": 8,
+        "maxLength": 12
       },
-      "hobbies": {
+      "document_type": {
+        "bsonType": "string",
+        "enum": ["CC", "CE", "PS", "PEP"]
+      },
+      "phone": {
+        "bsonType": "string"
+      },
+      "place": {
+        "bsonType": "object"
+      },
+      "user_type": {
         "bsonType": "array",
-        "description": "Selecione sus pasatiempos",
         "items": {
-          "bsonType": "string",
-          "enum": [
-            "Hornear",
-            "Jardinería",
-            "Instrumentos musicales",
-            "Puzzles de lógica",
-            "Poker y Blackjack",
-            "Orientación",
-            "Carpintería"
-          ],
-          "description": "Seleccione algunas de las opciones válidas"
+          "bsonType": "string"
         }
       },
-      "age": {
-        "bsonType": "int",
-        "minimum": 18,
-        "description": "La edad debe ser mayor de edad y ser un numero"
+      "active": {
+        "bsonType": "bool"
       }
-    },
-    "additionalProperties": false
+    }
   }
 }

@@ -1,0 +1,14 @@
+[
+    {
+        "_id": "681a14cbf7fde7dfbd1a81cf",
+        "code": "CASH",
+        "name": "Efectivo",
+        "active": true
+    },
+    {
+        "_id": "681a14cbf7fde7dfbd1a81d0",
+        "code": "CARD",
+        "name": "Tarjeta de Crédito",
+        "active": true
+    }
+]
