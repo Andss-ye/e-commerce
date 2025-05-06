@@ -18,10 +18,18 @@ async function main() {
 
     // Example usage
     await userService.createUser({
-      "firstName": "Andrew",
-      "lastName": "Rodriguez",
-      "age": 20,
-      "gender": "M"
+      name: "John Doe",
+      email: "johndoe@example.com",
+      password: "securePass1",
+      document_type: "CC",
+      document_number: "123456789",
+      phone: "1234567890",
+      place: {
+        city: "Bogotá",
+        country: "Colombia"
+      },
+      user_type: ["admin", "editor"],
+      active: true
     });
 
   } catch (error) {
